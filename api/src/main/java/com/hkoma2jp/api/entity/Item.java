@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -44,8 +46,9 @@ public class Item {
     @Column(name = "item_img")
     private String item_img;
 
-    @Column(name = "category_id")
-    private String category_id;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category_id;
 
     @Column(name = "created_at")
     private Date created_at;
