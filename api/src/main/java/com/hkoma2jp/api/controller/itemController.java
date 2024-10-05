@@ -3,6 +3,7 @@ package com.hkoma2jp.api.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,9 +20,24 @@ public class itemController {
         this.itemService = itemService;
     }
 
+    /**
+     * ## 全件取得
+     * @return List<Item>
+     */
     @GetMapping
     public List<Item> getItems() {
-        return itemService.find();
+        List<Item> itemList =  itemService.find();
+        return itemList;
     }
 
+    /**
+     * ## 商品詳細ページ
+     * @param id
+     * @return Item
+     */
+    @GetMapping("/{id}")
+    public Item getItem(@PathVariable Long id) {
+        Item item = itemService.findById(id).get();
+        return item;
+    }
 }
