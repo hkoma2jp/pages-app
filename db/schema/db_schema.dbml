@@ -1,0 +1,39 @@
+Project pagesdb {
+  database_type: "MySQL"
+}
+
+/* Define Tables */
+Table categories {
+  category_id INT [pk] // Primary Key
+  category_slug VARCHAR(255)
+  category_name VARCHAR(255)
+  category_img VARCHAR(255)
+  hierarchy JSON
+  created_at DATETIME [default: `CURRENT_TIMESTAMP`]
+  updated_at DATETIME [default: `CURRENT_TIMESTAMP`, note: "Updates on row modification"]
+  deleted_at DATETIME [default: `NULL`]
+
+  Indexes {
+    (category_id) [unique]
+  }
+}
+
+Table items {
+  id INT [pk] // Primary Key
+  sku_id VARCHAR(32) [not null]
+  item_slug VARCHAR(32) [not null]
+  item_name VARCHAR(255) [not null]
+  price INT [not null]
+  display_price INT [not null]
+  sku_img VARCHAR(255) [not null]
+  item_img VARCHAR(255) [not null]
+  category_id INT
+  created_at DATETIME [default: `CURRENT_TIMESTAMP`]
+  updated_at DATETIME [default: `CURRENT_TIMESTAMP`, note: "Updates on row modification"]
+  deleted_at DATETIME [default: `NULL`]
+}
+
+/* Define Foreign Key Relationships */
+Ref {
+  items.category_id > categories.category_id
+}
