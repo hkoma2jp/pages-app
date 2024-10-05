@@ -1,6 +1,7 @@
 package com.hkoma2jp.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,23 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
+    /**
+     * ## 全件取得
+     * @return List<Item>
+     */
     public List<Item> find() {
         List<Item> itemList = itemRepository.findAll();
         return itemList;
     }
+
+    /** 
+     * ## ID検索
+     * @param id
+     * @return Optional<Item>
+     */
+    public Optional<Item> findById(Long id) {
+        Optional<Item> item = itemRepository.findById(id);
+        return item;
+    }
+
 }
